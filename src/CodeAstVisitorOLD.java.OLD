@@ -1,0 +1,165 @@
+import gen.CodeParser;
+import gen.CodeVisitor;
+import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
+
+import java.util.Map;
+
+public class CodeAstVisitorOLD extends AbstractParseTreeVisitor<Map<String, Object>> implements CodeVisitor<Map<String, Object>> {
+
+    @Override @SuppressWarnings("unchecked")
+    public Map<String, Object> visitProgram(CodeParser.ProgramContext ctx) {
+        Map<String, Object>[] statements = new Map[ctx.statement().size()];
+        for(int i = 0; i < statements.length; i++) {
+            statements[i] = visit(ctx.statement(i));
+            //System.out.println("statement " + i + ": " + statements[i].toString());
+        }
+
+        return Map.of("type", "Program", "sourceType", "script", "body", statements);
+    }
+
+    @Override
+    protected Map<String, Object> aggregateResult(Map<String, Object> aggregate, Map<String, Object> nextResult) {
+        if (aggregate == null) {
+            return nextResult;
+        }
+
+        if (nextResult == null) {
+            return aggregate;
+        }
+        System.out.println("agg: " + aggregate);
+        System.out.println("next: " + nextResult);
+        System.out.println("^ should be aggregated ^");
+        return nextResult;
+    }
+
+    @Override
+    public Map<String, Object> visitStatement(CodeParser.StatementContext ctx) {
+        //System.out.println("statement: " + ctx.getText() + " /statement");
+        //System.out.println("child: " + ctx.getChild(0).getClass().getSimpleName());
+        return visitChildren(ctx);
+    }
+
+    @Override
+    public Map<String, Object> visitMethodCall(CodeParser.MethodCallContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    @Override
+    public Map<String, Object> visitRegularMethodCall(CodeParser.RegularMethodCallContext ctx) {
+        return Map.of("type", "CallExpression",
+                "callee", visit(ctx.accessor()),
+                "arguments", new Object[] {});
+    }
+
+    @Override
+    public Map<String, Object> visitChainedMethodCall(CodeParser.ChainedMethodCallContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> visitImposterMethodCall(CodeParser.ImposterMethodCallContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> visitAnonFuncDef(CodeParser.AnonFuncDefContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> visitMethodArg(CodeParser.MethodArgContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> visitBlock(CodeParser.BlockContext ctx) {
+        Map<String, Object>[] statements = new Map[ctx.statement().size()];
+        for(int i = 0; i < statements.length; i++) {
+            statements[i] = visit(ctx.statement(i));
+        }
+        return Map.of("type", "BlockStatement", "body", statements);
+    }
+
+    @Override
+    public Map<String, Object> visitLiteral(CodeParser.LiteralContext ctx) {
+        if (ctx.STRING() != null) {
+            return Map.of("type", "Literal",
+                    "value", ctx.STRING().getText(),
+                    "raw", "\"" + ctx.STRING().getText() + "\"");
+        }
+        if (ctx.NUM() != null) {
+            return Map.of("type", "Literal",
+                    "value", Double.parseDouble(ctx.NUM().getText()),
+                    "raw", ctx.NUM().getText());
+        }
+        if (ctx.IDENTIFIER() != null) {
+            return Map.of("type", "Identifier", "name", ctx.IDENTIFIER().getText());
+        }
+        if (ctx.ANON_IDENTIFIER() != null) {
+            return Map.of("type", "Identifier", "name", "anonArg" + ctx.ANON_IDENTIFIER().getText().substring(1));
+        }
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> visitUnaryOp(CodeParser.UnaryOpContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> visitBinaryOp(CodeParser.BinaryOpContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> visitTernaryOp(CodeParser.TernaryOpContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> visitAccessor(CodeParser.AccessorContext ctx) {
+        /*
+        if no payload, make payload of two first literals
+        if no following accessor, make map and return
+        make map and return visit(ctx.accessor(), payload)
+         */
+        if (ctx.accessor() == null) {
+            return visit(ctx.literal());
+        }
+        return visitAccessor(ctx.accessor().accessor(), Map.of("type", "MemberExpression", "object", visit(ctx.literal()), "property", visit(ctx.accessor().literal())));
+    }
+
+    public Map<String, Object> visitAccessor(CodeParser.AccessorContext ctx, Map<String, Object> payload) {
+        if (ctx == null) return payload;
+        Map<String, Object> ret = Map.of("type", "MemberExpression", "object", payload, "property", visit(ctx.literal()));
+        if (ctx.accessor() == null) {
+            return ret;
+        }
+        return visitAccessor(ctx.accessor(), ret);
+    }
+
+    @Override
+    public Map<String, Object> visitAssignmentExpr(CodeParser.AssignmentExprContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> visitDeclarationExpr(CodeParser.DeclarationExprContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> visitNestedStatement(CodeParser.NestedStatementContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> visitIfStatement(CodeParser.IfStatementContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> visitWhileStatement(CodeParser.WhileStatementContext ctx) {
+        return null;
+    }
+}

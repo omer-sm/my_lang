@@ -1,0 +1,38 @@
+- OOP
+- compiles to js
+- syntax is like elixir (but camelCased)
+
+- has numbers, bools, strings, arrays, objects, and atoms
+- atoms consist of alphanumeric characters, lower/upper.
+    the transpiler transpiles the atoms into their String.hashcode() hash
+- variables are declared as "myVar @= value.." for consts, and "myVar := value.." for lets.
+
+- blocks are {}
+- function headers: defh name(..args). funcs with the same name come under it, and can have guards
+- functions:
+- annotations like public, static or async are written with @ above the header or the definition.
+- each function can either have a block or a ", do: expr" which returns the result of the expression
+- guards: "when: expr, ". if the expr returns true the function is executed, otherwise it keeps searching and if
+    cant find one it returns null
+- implicit guards: when a function arg is a literal, it is converted to a guard.
+- syntax:
+@static @public
+defh fun(arg1, arg2)
+
+def fun(1, arg2) when: arg2 > 3, {
+...
+}
+
+def fun(arg1, 2), do: arg1 + 2
+
+- anon functions: "#2{#1 + #2}" create an arrow func with arity 2 that is (a, b) -> {a + b}
+- can be stored in variables and called like arrow funcs
+
+- chaining function calls: "obj.a() ~> .b()" puts obj after the ~>
+- imposter function call: "obj:>a(arg1)" turns into "a(obj, arg1)"
+
+- objects have either atom or string keys. %{key: val, "key1": val1}
+
+- classes:
+- can have annotations like functions do (@private @static etc)
+- defclass name {}
