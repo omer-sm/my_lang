@@ -47,6 +47,26 @@ public interface CodeListener extends ParseTreeListener {
 	 */
 	void exitExpression(CodeParser.ExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CodeParser#block}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlock(CodeParser.BlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#block}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlock(CodeParser.BlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#nestedStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterNestedStatement(CodeParser.NestedStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#nestedStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitNestedStatement(CodeParser.NestedStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CodeParser#functionCall}.
 	 * @param ctx the parse tree
 	 */
@@ -87,16 +107,6 @@ public interface CodeListener extends ParseTreeListener {
 	 */
 	void exitImposterFunctionCall(CodeParser.ImposterFunctionCallContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeParser#anonFuncDef}.
-	 * @param ctx the parse tree
-	 */
-	void enterAnonFuncDef(CodeParser.AnonFuncDefContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CodeParser#anonFuncDef}.
-	 * @param ctx the parse tree
-	 */
-	void exitAnonFuncDef(CodeParser.AnonFuncDefContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CodeParser#functionArg}.
 	 * @param ctx the parse tree
 	 */
@@ -107,25 +117,75 @@ public interface CodeListener extends ParseTreeListener {
 	 */
 	void exitFunctionArg(CodeParser.FunctionArgContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeParser#spreadElement}.
+	 * Enter a parse tree produced by {@link CodeParser#anonFuncDef}.
 	 * @param ctx the parse tree
 	 */
-	void enterSpreadElement(CodeParser.SpreadElementContext ctx);
+	void enterAnonFuncDef(CodeParser.AnonFuncDefContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CodeParser#spreadElement}.
+	 * Exit a parse tree produced by {@link CodeParser#anonFuncDef}.
 	 * @param ctx the parse tree
 	 */
-	void exitSpreadElement(CodeParser.SpreadElementContext ctx);
+	void exitAnonFuncDef(CodeParser.AnonFuncDefContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeParser#block}.
+	 * Enter a parse tree produced by {@link CodeParser#functionDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterBlock(CodeParser.BlockContext ctx);
+	void enterFunctionDeclaration(CodeParser.FunctionDeclarationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CodeParser#block}.
+	 * Exit a parse tree produced by {@link CodeParser#functionDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitBlock(CodeParser.BlockContext ctx);
+	void exitFunctionDeclaration(CodeParser.FunctionDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#functionAnnotations}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionAnnotations(CodeParser.FunctionAnnotationsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#functionAnnotations}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionAnnotations(CodeParser.FunctionAnnotationsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#functionParam}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionParam(CodeParser.FunctionParamContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#functionParam}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionParam(CodeParser.FunctionParamContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#functionBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionBody(CodeParser.FunctionBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#functionBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionBody(CodeParser.FunctionBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#returnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnStatement(CodeParser.ReturnStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#returnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnStatement(CodeParser.ReturnStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#generateExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterGenerateExpression(CodeParser.GenerateExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#generateExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitGenerateExpression(CodeParser.GenerateExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CodeParser#literal}.
 	 * @param ctx the parse tree
@@ -157,6 +217,200 @@ public interface CodeListener extends ParseTreeListener {
 	 */
 	void exitAnonIdentifier(CodeParser.AnonIdentifierContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CodeParser#thisLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void enterThisLiteral(CodeParser.ThisLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#thisLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void exitThisLiteral(CodeParser.ThisLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#parentLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void enterParentLiteral(CodeParser.ParentLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#parentLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void exitParentLiteral(CodeParser.ParentLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#accessor}.
+	 * @param ctx the parse tree
+	 */
+	void enterAccessor(CodeParser.AccessorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#accessor}.
+	 * @param ctx the parse tree
+	 */
+	void exitAccessor(CodeParser.AccessorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#spreadElement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSpreadElement(CodeParser.SpreadElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#spreadElement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSpreadElement(CodeParser.SpreadElementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#variableDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariableDeclaration(CodeParser.VariableDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#variableDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariableDeclaration(CodeParser.VariableDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#variableDeclarator}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariableDeclarator(CodeParser.VariableDeclaratorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#variableDeclarator}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariableDeclarator(CodeParser.VariableDeclaratorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#assignmentExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignmentExpr(CodeParser.AssignmentExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#assignmentExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignmentExpr(CodeParser.AssignmentExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#assignmentPattern}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignmentPattern(CodeParser.AssignmentPatternContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#assignmentPattern}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignmentPattern(CodeParser.AssignmentPatternContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ArrayBindingDec}
+	 * labeled alternative in {@link CodeParser#bindingDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayBindingDec(CodeParser.ArrayBindingDecContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ArrayBindingDec}
+	 * labeled alternative in {@link CodeParser#bindingDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayBindingDec(CodeParser.ArrayBindingDecContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ObjectBindingDec}
+	 * labeled alternative in {@link CodeParser#bindingDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterObjectBindingDec(CodeParser.ObjectBindingDecContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ObjectBindingDec}
+	 * labeled alternative in {@link CodeParser#bindingDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitObjectBindingDec(CodeParser.ObjectBindingDecContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#bindingPattern}.
+	 * @param ctx the parse tree
+	 */
+	void enterBindingPattern(CodeParser.BindingPatternContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#bindingPattern}.
+	 * @param ctx the parse tree
+	 */
+	void exitBindingPattern(CodeParser.BindingPatternContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#arrayExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayExpression(CodeParser.ArrayExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#arrayExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayExpression(CodeParser.ArrayExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#arrayExpressionElement}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayExpressionElement(CodeParser.ArrayExpressionElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#arrayExpressionElement}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayExpressionElement(CodeParser.ArrayExpressionElementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#arrayPattern}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayPattern(CodeParser.ArrayPatternContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#arrayPattern}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayPattern(CodeParser.ArrayPatternContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#arrayPatternElement}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayPatternElement(CodeParser.ArrayPatternElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#arrayPatternElement}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayPatternElement(CodeParser.ArrayPatternElementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#objectExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterObjectExpression(CodeParser.ObjectExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#objectExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitObjectExpression(CodeParser.ObjectExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#objectExpressionElement}.
+	 * @param ctx the parse tree
+	 */
+	void enterObjectExpressionElement(CodeParser.ObjectExpressionElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#objectExpressionElement}.
+	 * @param ctx the parse tree
+	 */
+	void exitObjectExpressionElement(CodeParser.ObjectExpressionElementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#objectPattern}.
+	 * @param ctx the parse tree
+	 */
+	void enterObjectPattern(CodeParser.ObjectPatternContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#objectPattern}.
+	 * @param ctx the parse tree
+	 */
+	void exitObjectPattern(CodeParser.ObjectPatternContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#objectPatternElement}.
+	 * @param ctx the parse tree
+	 */
+	void enterObjectPatternElement(CodeParser.ObjectPatternElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#objectPatternElement}.
+	 * @param ctx the parse tree
+	 */
+	void exitObjectPatternElement(CodeParser.ObjectPatternElementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CodeParser#unaryExpr}.
 	 * @param ctx the parse tree
 	 */
@@ -177,6 +431,16 @@ public interface CodeListener extends ParseTreeListener {
 	 */
 	void exitBinaryExpr(CodeParser.BinaryExprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CodeParser#logicExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogicExpr(CodeParser.LogicExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#logicExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogicExpr(CodeParser.LogicExprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CodeParser#ternaryExpr}.
 	 * @param ctx the parse tree
 	 */
@@ -187,45 +451,25 @@ public interface CodeListener extends ParseTreeListener {
 	 */
 	void exitTernaryExpr(CodeParser.TernaryExprContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeParser#accessor}.
+	 * Enter a parse tree produced by {@link CodeParser#newExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterAccessor(CodeParser.AccessorContext ctx);
+	void enterNewExpression(CodeParser.NewExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CodeParser#accessor}.
+	 * Exit a parse tree produced by {@link CodeParser#newExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitAccessor(CodeParser.AccessorContext ctx);
+	void exitNewExpression(CodeParser.NewExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeParser#assignmentExpr}.
+	 * Enter a parse tree produced by {@link CodeParser#waitforExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssignmentExpr(CodeParser.AssignmentExprContext ctx);
+	void enterWaitforExpression(CodeParser.WaitforExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CodeParser#assignmentExpr}.
+	 * Exit a parse tree produced by {@link CodeParser#waitforExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssignmentExpr(CodeParser.AssignmentExprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CodeParser#variableDeclaration}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariableDeclaration(CodeParser.VariableDeclarationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CodeParser#variableDeclaration}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariableDeclaration(CodeParser.VariableDeclarationContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CodeParser#nestedStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterNestedStatement(CodeParser.NestedStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CodeParser#nestedStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitNestedStatement(CodeParser.NestedStatementContext ctx);
+	void exitWaitforExpression(CodeParser.WaitforExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CodeParser#ifStatement}.
 	 * @param ctx the parse tree
@@ -317,73 +561,357 @@ public interface CodeListener extends ParseTreeListener {
 	 */
 	void exitBreakStatement(CodeParser.BreakStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeParser#functionDeclaration}.
+	 * Enter a parse tree produced by {@link CodeParser#throwStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctionDeclaration(CodeParser.FunctionDeclarationContext ctx);
+	void enterThrowStatement(CodeParser.ThrowStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CodeParser#functionDeclaration}.
+	 * Exit a parse tree produced by {@link CodeParser#throwStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctionDeclaration(CodeParser.FunctionDeclarationContext ctx);
+	void exitThrowStatement(CodeParser.ThrowStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeParser#functionAnnotations}.
+	 * Enter a parse tree produced by {@link CodeParser#guardStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctionAnnotations(CodeParser.FunctionAnnotationsContext ctx);
+	void enterGuardStatement(CodeParser.GuardStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CodeParser#functionAnnotations}.
+	 * Exit a parse tree produced by {@link CodeParser#guardStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctionAnnotations(CodeParser.FunctionAnnotationsContext ctx);
+	void exitGuardStatement(CodeParser.GuardStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeParser#functionParam}.
+	 * Enter a parse tree produced by {@link CodeParser#fromClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctionParam(CodeParser.FunctionParamContext ctx);
+	void enterFromClause(CodeParser.FromClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CodeParser#functionParam}.
+	 * Exit a parse tree produced by {@link CodeParser#fromClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctionParam(CodeParser.FunctionParamContext ctx);
+	void exitFromClause(CodeParser.FromClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeParser#functionParamAssign}.
+	 * Enter a parse tree produced by {@link CodeParser#endwithClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctionParamAssign(CodeParser.FunctionParamAssignContext ctx);
+	void enterEndwithClause(CodeParser.EndwithClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CodeParser#functionParamAssign}.
+	 * Exit a parse tree produced by {@link CodeParser#endwithClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctionParamAssign(CodeParser.FunctionParamAssignContext ctx);
+	void exitEndwithClause(CodeParser.EndwithClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeParser#functionBody}.
+	 * Enter a parse tree produced by {@link CodeParser#logicStatementTest}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctionBody(CodeParser.FunctionBodyContext ctx);
+	void enterLogicStatementTest(CodeParser.LogicStatementTestContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CodeParser#functionBody}.
+	 * Exit a parse tree produced by {@link CodeParser#logicStatementTest}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctionBody(CodeParser.FunctionBodyContext ctx);
+	void exitLogicStatementTest(CodeParser.LogicStatementTestContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeParser#returnStatement}.
+	 * Enter a parse tree produced by {@link CodeParser#matchStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterReturnStatement(CodeParser.ReturnStatementContext ctx);
+	void enterMatchStatement(CodeParser.MatchStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CodeParser#returnStatement}.
+	 * Exit a parse tree produced by {@link CodeParser#matchStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitReturnStatement(CodeParser.ReturnStatementContext ctx);
+	void exitMatchStatement(CodeParser.MatchStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CodeParser#generateExpression}.
+	 * Enter a parse tree produced by {@link CodeParser#matchBody}.
 	 * @param ctx the parse tree
 	 */
-	void enterGenerateExpression(CodeParser.GenerateExpressionContext ctx);
+	void enterMatchBody(CodeParser.MatchBodyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CodeParser#generateExpression}.
+	 * Exit a parse tree produced by {@link CodeParser#matchBody}.
 	 * @param ctx the parse tree
 	 */
-	void exitGenerateExpression(CodeParser.GenerateExpressionContext ctx);
+	void exitMatchBody(CodeParser.MatchBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code FullMatchClause}
+	 * labeled alternative in {@link CodeParser#matchClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterFullMatchClause(CodeParser.FullMatchClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code FullMatchClause}
+	 * labeled alternative in {@link CodeParser#matchClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitFullMatchClause(CodeParser.FullMatchClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ShortMatchClause}
+	 * labeled alternative in {@link CodeParser#matchClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterShortMatchClause(CodeParser.ShortMatchClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ShortMatchClause}
+	 * labeled alternative in {@link CodeParser#matchClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitShortMatchClause(CodeParser.ShortMatchClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#matchExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterMatchExpression(CodeParser.MatchExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#matchExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitMatchExpression(CodeParser.MatchExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#matchExpressionBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterMatchExpressionBody(CodeParser.MatchExpressionBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#matchExpressionBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitMatchExpressionBody(CodeParser.MatchExpressionBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#matchExpressionClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterMatchExpressionClause(CodeParser.MatchExpressionClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#matchExpressionClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitMatchExpressionClause(CodeParser.MatchExpressionClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#condStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondStatement(CodeParser.CondStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#condStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondStatement(CodeParser.CondStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#condBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondBody(CodeParser.CondBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#condBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondBody(CodeParser.CondBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#condClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondClause(CodeParser.CondClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#condClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondClause(CodeParser.CondClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#condExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondExpression(CodeParser.CondExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#condExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondExpression(CodeParser.CondExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#condExpressionBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondExpressionBody(CodeParser.CondExpressionBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#condExpressionBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondExpressionBody(CodeParser.CondExpressionBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#condExpressionClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondExpressionClause(CodeParser.CondExpressionClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#condExpressionClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondExpressionClause(CodeParser.CondExpressionClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#classDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterClassDeclaration(CodeParser.ClassDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#classDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitClassDeclaration(CodeParser.ClassDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#classParentDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterClassParentDeclaration(CodeParser.ClassParentDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#classParentDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitClassParentDeclaration(CodeParser.ClassParentDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#classBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterClassBody(CodeParser.ClassBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#classBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitClassBody(CodeParser.ClassBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code MethodDef}
+	 * labeled alternative in {@link CodeParser#methodDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodDef(CodeParser.MethodDefContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code MethodDef}
+	 * labeled alternative in {@link CodeParser#methodDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodDef(CodeParser.MethodDefContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code CtorDef}
+	 * labeled alternative in {@link CodeParser#methodDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterCtorDef(CodeParser.CtorDefContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code CtorDef}
+	 * labeled alternative in {@link CodeParser#methodDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitCtorDef(CodeParser.CtorDefContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#methodAnnotations}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodAnnotations(CodeParser.MethodAnnotationsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#methodAnnotations}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodAnnotations(CodeParser.MethodAnnotationsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#methodBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodBody(CodeParser.MethodBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#methodBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodBody(CodeParser.MethodBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#importDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterImportDeclaration(CodeParser.ImportDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#importDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitImportDeclaration(CodeParser.ImportDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DefaultImport}
+	 * labeled alternative in {@link CodeParser#importSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefaultImport(CodeParser.DefaultImportContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DefaultImport}
+	 * labeled alternative in {@link CodeParser#importSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefaultImport(CodeParser.DefaultImportContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code AllImport}
+	 * labeled alternative in {@link CodeParser#importSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterAllImport(CodeParser.AllImportContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code AllImport}
+	 * labeled alternative in {@link CodeParser#importSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitAllImport(CodeParser.AllImportContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code SpecificImport}
+	 * labeled alternative in {@link CodeParser#importSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterSpecificImport(CodeParser.SpecificImportContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SpecificImport}
+	 * labeled alternative in {@link CodeParser#importSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitSpecificImport(CodeParser.SpecificImportContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#exportDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterExportDeclaration(CodeParser.ExportDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#exportDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitExportDeclaration(CodeParser.ExportDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#exportAllDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterExportAllDeclaration(CodeParser.ExportAllDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#exportAllDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitExportAllDeclaration(CodeParser.ExportAllDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#exportDefaultDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterExportDefaultDeclaration(CodeParser.ExportDefaultDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#exportDefaultDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitExportDefaultDeclaration(CodeParser.ExportDefaultDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#exportNamedDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterExportNamedDeclaration(CodeParser.ExportNamedDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#exportNamedDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitExportNamedDeclaration(CodeParser.ExportNamedDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#exportSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterExportSpecifier(CodeParser.ExportSpecifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#exportSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitExportSpecifier(CodeParser.ExportSpecifierContext ctx);
 }
