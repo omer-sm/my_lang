@@ -237,6 +237,26 @@ public interface CodeListener extends ParseTreeListener {
 	 */
 	void exitParentLiteral(CodeParser.ParentLiteralContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CodeParser#booleanLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleanLiteral(CodeParser.BooleanLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#booleanLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleanLiteral(CodeParser.BooleanLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#nilLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void enterNilLiteral(CodeParser.NilLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#nilLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void exitNilLiteral(CodeParser.NilLiteralContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CodeParser#accessor}.
 	 * @param ctx the parse tree
 	 */
@@ -297,26 +317,32 @@ public interface CodeListener extends ParseTreeListener {
 	 */
 	void exitAssignmentPattern(CodeParser.AssignmentPatternContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ArrayBindingDec}
-	 * labeled alternative in {@link CodeParser#bindingDeclaration}.
+	 * Enter a parse tree produced by {@link CodeParser#bindingDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterBindingDeclaration(CodeParser.BindingDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#bindingDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitBindingDeclaration(CodeParser.BindingDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#arrayBindingDec}.
 	 * @param ctx the parse tree
 	 */
 	void enterArrayBindingDec(CodeParser.ArrayBindingDecContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ArrayBindingDec}
-	 * labeled alternative in {@link CodeParser#bindingDeclaration}.
+	 * Exit a parse tree produced by {@link CodeParser#arrayBindingDec}.
 	 * @param ctx the parse tree
 	 */
 	void exitArrayBindingDec(CodeParser.ArrayBindingDecContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ObjectBindingDec}
-	 * labeled alternative in {@link CodeParser#bindingDeclaration}.
+	 * Enter a parse tree produced by {@link CodeParser#objectBindingDec}.
 	 * @param ctx the parse tree
 	 */
 	void enterObjectBindingDec(CodeParser.ObjectBindingDecContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ObjectBindingDec}
-	 * labeled alternative in {@link CodeParser#bindingDeclaration}.
+	 * Exit a parse tree produced by {@link CodeParser#objectBindingDec}.
 	 * @param ctx the parse tree
 	 */
 	void exitObjectBindingDec(CodeParser.ObjectBindingDecContext ctx);
@@ -914,4 +940,14 @@ public interface CodeListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExportSpecifier(CodeParser.ExportSpecifierContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CodeParser#exportNamedDeclarationSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterExportNamedDeclarationSpecifier(CodeParser.ExportNamedDeclarationSpecifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CodeParser#exportNamedDeclarationSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitExportNamedDeclarationSpecifier(CodeParser.ExportNamedDeclarationSpecifierContext ctx);
 }

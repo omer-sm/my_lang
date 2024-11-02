@@ -1,10 +1,16 @@
 grammar Code;
 
 /*
+ * TO ADD:
+ * functions can be 'def a(), throw: ...' to throw errors if they are triggered
+ * arrow functions / named anon functions
+ */
+
+/*
  * Parser
  */
 
-program: statement* EOF;
+program: NL* statement* NL* EOF;
 
 // base
 
@@ -49,6 +55,7 @@ expression: anonFuncDef
             | matchExpression
             | condExpression
             | waitforExpression
+            | accessor
             ;
 
 block: NL* '{' NL* statement* NL*'}' NL*;
@@ -97,8 +104,10 @@ literal: STRING
         | NUM
         | thisLiteral
         | parentLiteral
-        | identifier
+        | nilLiteral
+        | booleanLiteral
         | anonIdentifier
+        | identifier
         ;
 
 identifier: IDENTIFIER;
@@ -109,6 +118,10 @@ thisLiteral: 'this';
 
 parentLiteral: 'parent';
 
+booleanLiteral: 'true' | 'false';
+
+nilLiteral: 'nil';
+
 accessor: literal NL* ('.' accessor)?;
 
 spreadElement: '..' expression;
@@ -116,7 +129,7 @@ spreadElement: '..' expression;
 
 // variables and pattern matching
 
-variableDeclaration: variableDeclarator | bindingDeclaration (',' variableDeclaration)?;
+variableDeclaration: variableDeclarator | bindingDeclaration;
 
 variableDeclarator: identifier DECLARATION_OP expression;
 
@@ -124,8 +137,11 @@ assignmentExpr: (accessor | arrayPattern) ASSIGNMENT_OP expression;
 
 assignmentPattern: identifier PARAM_ASSIGN_OP expression;
 
-bindingDeclaration: (arrayPattern NL* DECLARATION_OP expression NL*) #ArrayBindingDec
-                    | (objectPattern NL* DECLARATION_OP expression NL*) #ObjectBindingDec;
+bindingDeclaration: arrayBindingDec | objectBindingDec;
+
+arrayBindingDec: arrayPattern NL* DECLARATION_OP expression NL*;
+
+objectBindingDec: objectPattern NL* DECLARATION_OP expression NL*;
 
 bindingPattern: arrayPattern | objectPattern;
 
@@ -203,7 +219,7 @@ matchStatement: 'match' '(' expression ')' matchBody; // switch/case equivalent
 matchBody: '{' NL* (matchClause NL*)* NL* '}';
 
 matchClause: (logicStatementTest ':' statement) #FullMatchClause
-           | (logicStatementTest '=>' statement) #ShortMatchClause;
+           | (logicStatementTest '=>' statement) #ShortMatchClause; // match clause with implicit break
 
 matchExpression: 'match!' '(' expression ')' matchExpressionBody; // match with implicit return
 
@@ -246,7 +262,7 @@ methodBody: block
 
 importDeclaration: 'import' (importSpecifier (',' NL* importSpecifier)+ 'of')? STRING;
 
-importSpecifier: 'default' #DefaultImport
+importSpecifier: ('defaults as' identifier) #DefaultImport
                 | ('all as' identifier) #AllImport
                 | (identifier ('as' identifier)?) #SpecificImport;
 
@@ -259,10 +275,14 @@ exportAllDeclaration: 'export all of' STRING;
 
 exportDefaultDeclaration: 'export as default' (identifier | bindingPattern | classDeclaration | expression | functionDeclaration);
 
-exportNamedDeclaration: 'export' exportSpecifier (',' NL* exportSpecifier)*;
+exportNamedDeclaration: ('export' exportSpecifier (',' NL* exportSpecifier)*)
+                        | ('export' exportNamedDeclarationSpecifier);
 
 exportSpecifier: (accessor 'as' accessor)
                 | (accessor);
+
+exportNamedDeclarationSpecifier: functionDeclaration | classDeclaration | variableDeclaration;
+
 
 
 /*

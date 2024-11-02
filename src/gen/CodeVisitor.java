@@ -148,6 +148,18 @@ public interface CodeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParentLiteral(CodeParser.ParentLiteralContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CodeParser#booleanLiteral}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBooleanLiteral(CodeParser.BooleanLiteralContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeParser#nilLiteral}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNilLiteral(CodeParser.NilLiteralContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CodeParser#accessor}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -184,15 +196,19 @@ public interface CodeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignmentPattern(CodeParser.AssignmentPatternContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ArrayBindingDec}
-	 * labeled alternative in {@link CodeParser#bindingDeclaration}.
+	 * Visit a parse tree produced by {@link CodeParser#bindingDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBindingDeclaration(CodeParser.BindingDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeParser#arrayBindingDec}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitArrayBindingDec(CodeParser.ArrayBindingDecContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ObjectBindingDec}
-	 * labeled alternative in {@link CodeParser#bindingDeclaration}.
+	 * Visit a parse tree produced by {@link CodeParser#objectBindingDec}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -552,4 +568,10 @@ public interface CodeVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExportSpecifier(CodeParser.ExportSpecifierContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CodeParser#exportNamedDeclarationSpecifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExportNamedDeclarationSpecifier(CodeParser.ExportNamedDeclarationSpecifierContext ctx);
 }

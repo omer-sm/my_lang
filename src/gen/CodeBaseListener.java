@@ -292,6 +292,30 @@ public class CodeBaseListener implements CodeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBooleanLiteral(CodeParser.BooleanLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBooleanLiteral(CodeParser.BooleanLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNilLiteral(CodeParser.NilLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNilLiteral(CodeParser.NilLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAccessor(CodeParser.AccessorContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -359,6 +383,18 @@ public class CodeBaseListener implements CodeListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAssignmentPattern(CodeParser.AssignmentPatternContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBindingDeclaration(CodeParser.BindingDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBindingDeclaration(CodeParser.BindingDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1079,6 +1115,18 @@ public class CodeBaseListener implements CodeListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExportSpecifier(CodeParser.ExportSpecifierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExportNamedDeclarationSpecifier(CodeParser.ExportNamedDeclarationSpecifierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExportNamedDeclarationSpecifier(CodeParser.ExportNamedDeclarationSpecifierContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
