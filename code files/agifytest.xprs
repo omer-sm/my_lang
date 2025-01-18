@@ -1,0 +1,7 @@
+name @= "asma"
+r1 @= waitfor fetch("https://api.nationalize.io?name=" + name)
+j1 @= waitfor r1.json()
+[country] @= j1.country
+r2 @= waitfor fetch("https://api.agify.io?country_id=" + country.country_id + "&name=" + name)
+j2 @= waitfor r2.json()
+console.log(j2.age)

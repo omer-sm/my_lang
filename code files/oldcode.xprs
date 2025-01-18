@@ -1,0 +1,26 @@
+a := 1
+f @= #/1{console.log(#1)}
+while (a < 5) {
+    if (a == 2) {
+        skip
+    }
+    f(a)
+    a++
+}
+for (i := 0; i < 5; i++) {
+    console.log(i)
+}
+@async
+def func(arg, arg2 ?= 3) {
+    console.log(arg + arg2)
+}
+def f(arg): arg + 1
+
+func(1)
+:> func(4)
+:> func(3)
+
+obj.fun(5)
+~> fun(8)
+:> obj.fun(2)
+~> fun(1)

@@ -1,0 +1,36 @@
+// boolean literals and nil
+a @= true
+console.log("should be false: ", a == nil)
+
+// cond
+cond {
+    a == 2: console.log("a = 2")
+    a == 1: console.log("a = 1")
+    a == 0: {
+        console.log("a = 0. this is a block")
+    }
+    any: console.log("a didn't match any cond clause")
+}
+
+// cond! and arrays
+b @= [1, 2, 3]
+console.log("b length: ", cond! {
+    b.length > 5: "> 5"
+    b.length > 2: "> 2"
+    any: "<= 2"
+})
+
+// match and match!
+match (b.length) {
+    1: {
+        console.log("1, non breaking")
+    }
+    2 => console.log(2)
+    any => console.log("other")
+}
+console.log(match! (b.length) {
+    1 => "one"
+    2 => "two"
+    3 => "three"
+    any => "other"
+})
